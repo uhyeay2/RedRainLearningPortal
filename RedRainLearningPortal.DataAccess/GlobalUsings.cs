@@ -1,0 +1,8 @@
+﻿global using RedRainLearningPortal.DataAccess.Interfaces;
+global using RedRainLearningPortal.DataAccess.SqlGeneration;
+global using RedRainLearningPortal.DataAccess.Models.BaseRequests;
+global using RedRainLearningPortal.DataAccess.Models.DataTransferObjects;
+global using RedRainLearningPortal.DataAccess.SqlGeneration.Attributes;
+global using RedRainLearningPortal.DataAccess.SqlGeneration.Attributes.FetchAttributes;
+global using RedRainLearningPortal.DataAccess.SqlGeneration.Attributes.InsertAttributes;
+global using RedRainLearningPortal.DataAccess.SqlGeneration.Attributes.UpdateAttributes;

@@ -1,0 +1,23 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Mappings\2uvr5f2d.swk~" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="12.0.0" />
+    <PackageReference Include="MediatR" Version="11.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\RedRainLearningPortal.DataAccess\RedRainLearningPortal.DataAccess.csproj" />
+    <ProjectReference Include="..\RedRainLearningPortal.Domain\RedRainLearningPortal.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
