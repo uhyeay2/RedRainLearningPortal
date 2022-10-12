@@ -15,7 +15,6 @@
         public bool Success { get; set; }
         public string Message { get; set; } = string.Empty;
 
-        public static BaseResponse Conflict(string message) => new (403, false, message);
     }
 
     public class BaseResponse<TContent> : BaseResponse, IResponse<TContent>
@@ -30,12 +29,5 @@
         }
 
         public TContent? Content { get; set; }
-    }
-
-    public class SuccessResponse : BaseResponse<object>
-    {
-        public SuccessResponse(object content) : base(200, true, "Success", content) { }
-
-        public SuccessResponse() : base(200, true, "Success") { }
-    }
+    }   
 }

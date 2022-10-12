@@ -4,7 +4,7 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
 {
     public class GetUserByEmailRequest : EmailBasedRequest { }
 
-    internal class GetUserByEmailHandler : BaseDataHandler<GetUserByEmailRequest>, IRequestHandler<GetUserByEmailRequest, IResponse>
+    internal class GetUserByEmailHandler : BaseDataHandler<GetUserByEmailRequest>
     {
         public GetUserByEmailHandler(IDataHandler dataHandler, IMapper mapper) : base(dataHandler, mapper) { }
 
