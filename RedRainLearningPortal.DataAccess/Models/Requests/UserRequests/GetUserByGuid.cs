@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.DataAccess.Models.Requests.UserRequests
 {
-    internal class GetUserByGuid : EmailBasedRequest
+    public class GetUserByGuid : EmailBasedRequest
     {
         private static readonly string _sql = SqlGenerator.Fetch(typeof(UserDTO));
 

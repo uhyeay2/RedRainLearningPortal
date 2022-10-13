@@ -3,6 +3,7 @@
     public class GetUserByEmailOrAccountName : IRequestObject
     {
         public string? Email { get; set; }
+
         public string? AccountName { get; set; }
 
         public object? GenerateParameters() => new { Email, AccountName };

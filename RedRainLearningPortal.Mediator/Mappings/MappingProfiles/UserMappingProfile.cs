@@ -7,11 +7,20 @@ namespace RedRainLearningPortal.Mediator.Mappings.MappingProfiles
     {
         public UserMappingProfile()
         {
+            // DTO x Domain
             CreateMap<UserDTO, User>().ReverseMap();
 
+            // Get Requests
             CreateMap<GetUserByEmailOrAccountName, GetUserByEmailRequest>().ReverseMap();
-            CreateMap<InsertUser, InsertUserRequest>().ReverseMap();
+            CreateMap<GetUserByEmailOrAccountName, GetUserByAccountNameRequest>().ReverseMap();
+            CreateMap<GetUserByGuid, GetUserByGuidRequest>().ReverseMap();
+            
+            // IsExists Requests
+            CreateMap<IsAccountNameTaken, IsAccountNameTakenRequest>().ReverseMap();
             CreateMap<IsEmailRegistered, IsEmailRegisteredRequest>().ReverseMap();
+            
+            // Insert Requests
+            CreateMap<InsertUser, InsertUserRequest>().ReverseMap();
         }
     }
 }

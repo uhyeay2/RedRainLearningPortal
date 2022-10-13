@@ -1,17 +1,12 @@
 ﻿using RedRainLearningPortal.Domain.Extensions;
-using RedRainLearningPortal.Domain.Interfaces;
 
 namespace RedRainLearningPortal.Mediator.Abstractions.Requests
 {
-    public abstract class EmailBasedRequest : BaseRequest, IValidatable
+    public abstract class EmailBasedRequest : BaseValidatableRequest
     {
-        protected EmailBasedRequest()
-        {
-        }
-
         public string Email { get; set; } = string.Empty;
 
-        public virtual bool IsValid(out string failedValidationMessage)
+        public override bool IsValid(out string failedValidationMessage)
         {
             failedValidationMessage = string.Empty;
 
@@ -26,7 +21,6 @@ namespace RedRainLearningPortal.Mediator.Abstractions.Requests
                 failedValidationMessage = "Validation Failed - Invalid Email Format";
                 return false;
             }
-
             return true;
         }
     }
