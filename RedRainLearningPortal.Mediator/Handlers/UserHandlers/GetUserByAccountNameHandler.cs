@@ -12,7 +12,7 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
         {
             var dto = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(_mapper.Map<GetUserByEmailOrAccountName>(request));
 
-            return dto != null ? Response.Success(_mapper.Map<User>(dto)) : Response.NotFound("No User was found with the AccountName: " + request.AccountName);
+            return dto != null ? Response.Success(_mapper.Map<User>(dto)) : Response.NotFound("User", $"AccountName: {request.AccountName}");
         }
     }
 }

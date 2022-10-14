@@ -11,7 +11,7 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
         internal override async Task<IResponse> HandleRequest(DeleteUserRequest request, CancellationToken cancellationToken = default)
         {
             return await _dataHandler.ExecuteAsync(_mapper.Map<DeleteUser>(request)) == 1 ? 
-                Response.Success() : Response.NotFound("No User was found with the Guid: " + request.Guid);
+                Response.Success() : Response.NotFound("User", $"Guid: {request.Guid}");
         }
     }
 }

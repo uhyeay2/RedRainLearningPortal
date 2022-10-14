@@ -1,5 +1,4 @@
 ﻿using RedRainLearningPortal.Api.Extensions;
-using RedRainLearningPortal.Mediator.Abstractions.Responses;
 using System.Text.Json;
 
 namespace RedRainLearningPortal.Api.Middleware

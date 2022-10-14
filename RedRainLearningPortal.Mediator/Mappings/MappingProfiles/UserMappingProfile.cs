@@ -21,6 +21,9 @@ namespace RedRainLearningPortal.Mediator.Mappings.MappingProfiles
             
             // Insert Requests
             CreateMap<InsertUser, InsertUserRequest>().ReverseMap();
+
+            // Delete Requests
+            CreateMap<DeleteUser, DeleteUserRequest>().ReverseMap();
         }
     }
 }

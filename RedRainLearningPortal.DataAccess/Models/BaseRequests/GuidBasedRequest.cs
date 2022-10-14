@@ -8,6 +8,8 @@ namespace RedRainLearningPortal.DataAccess.Models.BaseRequests
 
         public GuidBasedRequest(Guid guid) => Guid = guid;
 
+        public GuidBasedRequest() { }
+
         public virtual object? GenerateParameters() => new { Guid };
 
         public abstract string GenerateSql();

@@ -28,8 +28,8 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
 
         internal override async Task<IResponse> HandleRequest(InsertUserRequest request, CancellationToken cancellationToken = default)
         {
-            return await _dataHandler.ExecuteAsync(_mapper.Map<InsertUser>(request)) == 1 ?
-                Response.Success() : Response.AlreadyExists("An account already exists with the Email or AccountName provided.");
+            return await _dataHandler.ExecuteAsync(_mapper.Map<InsertUser>(request)) == 1 ? Response.Success() 
+                : Response.AlreadyExists("User", $"Email: {request.Email} OR AccountName: {request.AccountName}");
         }
     }
 }
