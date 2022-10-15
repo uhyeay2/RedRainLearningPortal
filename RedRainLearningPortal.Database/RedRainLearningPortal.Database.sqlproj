@@ -59,9 +59,17 @@
     <Folder Include="dbo" />
     <Folder Include="PublishLocations" />
     <Folder Include="Scripts" />
+    <Folder Include="dbo\Tables" />
+    <Folder Include="dbo\Tables\Organizations" />
+    <Folder Include="dbo\Tables\Users" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="dbo\User.sql" />
+    <Build Include="dbo\Tables\Organizations\Organization.sql" />
+    <Build Include="dbo\Tables\Organizations\OrganizationMember.sql" />
+    <Build Include="dbo\Tables\Organizations\OrganizationRole.sql" />
+    <Build Include="dbo\Tables\Users\User.sql" />
+    <Build Include="dbo\Tables\Users\UserAction.sql" />
+    <Build Include="dbo\Tables\Organizations\OrganizationMemberRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\RedRainLearningPortal.Database.publish.xml" />

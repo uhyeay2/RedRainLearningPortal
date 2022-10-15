@@ -21,7 +21,10 @@
         [Fetchable]
         public string AccountName { get; set; } = null!;
 
-        [Fetchable("[Name]")]
-        public string? Name { get; set; } = null!;
+        [Fetchable]
+        public string FirstName { get; set; } = null!;
+
+        [Fetchable]
+        public string LastName { get; set; } = null!;
     }
 }

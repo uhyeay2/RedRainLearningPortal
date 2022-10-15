@@ -1,4 +1,5 @@
 ﻿using RedRainLearningPortal.DataAccess.Models.Requests.UserRequests;
+using RedRainLearningPortal.Domain.Models.Users;
 
 namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
 {
@@ -8,7 +9,7 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
     {
         public GetUserByAccountNameHandler(IDataHandler dataHandler, IMapper mapper) : base(dataHandler, mapper) { }
 
-        internal override async Task<IResponse> HandleRequest(GetUserByAccountNameRequest request, CancellationToken cancellationToken = default)
+        internal override async Task<BaseResponse> HandleRequest(GetUserByAccountNameRequest request, CancellationToken cancellationToken = default)
         {
             var dto = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(_mapper.Map<GetUserByEmailOrAccountName>(request));
 

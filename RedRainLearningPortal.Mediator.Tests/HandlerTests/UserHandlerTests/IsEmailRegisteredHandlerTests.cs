@@ -10,8 +10,5 @@ namespace RedRainLearningPortal.Mediator.Tests.HandlerTests.UserHandlerTests
         {
             _handler = new(_mockDataHandler.Object, _mapper);
         }
-
-        //TODO: Set up tests
-
     }
 }

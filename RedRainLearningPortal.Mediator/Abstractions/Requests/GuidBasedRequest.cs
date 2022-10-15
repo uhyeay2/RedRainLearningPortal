@@ -4,13 +4,13 @@
     {
         public Guid Guid { get; set; }
 
-        public override bool IsValid(out string failedValidationMessage)
+        public override bool IsValid(out List<string> validationErrors)
         {
-            failedValidationMessage = string.Empty;
+            validationErrors = new();
 
-            if(Guid == Guid.Empty)
+            if (Guid == Guid.Empty)
             {
-                failedValidationMessage = "Validation Failed! Guid is a required Field";
+                validationErrors.Add("Guid is a required Field! Guid received: " + Guid);
                 return false; 
             }
             return true;

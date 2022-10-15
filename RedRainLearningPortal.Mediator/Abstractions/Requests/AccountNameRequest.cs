@@ -4,13 +4,13 @@
     {
         public string? AccountName { get; set; }
 
-        public override bool IsValid(out string failedValidationMessage)
+        public override bool IsValid(out List<string> validationErrors)
         {
-            failedValidationMessage = string.Empty;
+            validationErrors = new();
 
             if (string.IsNullOrEmpty(AccountName))
             {
-                failedValidationMessage = "Validation Failed! AccountName is a required field!";
+                validationErrors.Add("AccountName field cannot be Null/Empty/Whitespace!");
                 return false;
             }
             return true;

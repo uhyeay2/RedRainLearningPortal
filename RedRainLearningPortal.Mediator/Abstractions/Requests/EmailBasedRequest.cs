@@ -6,19 +6,13 @@ namespace RedRainLearningPortal.Mediator.Abstractions.Requests
     {
         public string Email { get; set; } = string.Empty;
 
-        public override bool IsValid(out string failedValidationMessage)
+        public override bool IsValid(out List<string> validationErrors)
         {
-            failedValidationMessage = string.Empty;
-
-            if(string.IsNullOrWhiteSpace(Email))
-            {
-                failedValidationMessage = "Validation Failed - Email field is required.";
-                return false;
-            }
+            validationErrors = new();
 
             if (!Email.IsValidEmailFormat())
             {
-                failedValidationMessage = "Validation Failed - Invalid Email Format";
+                validationErrors.Add("Email provided was not a valid email format! Email received: " + Email);
                 return false;
             }
             return true;

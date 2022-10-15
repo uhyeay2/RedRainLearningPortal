@@ -11,7 +11,7 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         [Test]
         public async Task IsEmailRegistered_Given_EmailIsRegistered_Should_ReturnTrue()
         {
-            await InsertUser(email: _testUser.Email);
+            await SeedUser(email: _testUser.Email);
 
             (await _dataHandler.FetchAsync<IsEmailRegistered, bool>(new(_testUser.Email))).ShouldBeTrue();
         }

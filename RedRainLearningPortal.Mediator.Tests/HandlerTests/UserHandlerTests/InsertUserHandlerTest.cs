@@ -3,34 +3,24 @@ using RedRainLearningPortal.Mediator.Handlers.UserHandlers;
 
 namespace RedRainLearningPortal.Mediator.Tests.HandlerTests.UserHandlerTests
 {
-    internal class InsertUserHandlerTest : BaseDataHandlerTest
+    internal class InsertUserHandlerTest : BaseDataHandlerWithMediatorTest
     {
-        private readonly InsertUserHandler _handler;
+        private InsertUserHandler Handler => new(_mockDataHandler.Object, _mapper, _mockMediator.Object);
 
-        private InsertUserRequest _request;
-
-        public InsertUserHandlerTest()
+        private static InsertUserRequest Request => new()
         {
-            _handler = new(_mockDataHandler.Object, _mapper);
-        }
-
-        [SetUp]
-        public void Setup()
-        {
-            _request = new()
-            {
-                AccountName = "AccountName",
-                Email = "Email@Email.com",
-                Name = "Test Name"
-            };
-        }
+            AccountName = "TestAccountName",
+            Email = "JohnDoe@TestAccountName.Com",
+            FirstName = "John",
+            LastName = "Doe",
+        };
 
         [Test]
         public async Task InsertUser_Given_ExecutionReturnsOne_ShouldReturn_SuccessResponse()
         {
             _mockDataHandler.Setup(_ => _.ExecuteAsync(It.IsAny<InsertUser>())).Returns(Task.FromResult(1));
 
-            var response = await _handler.Handle(_request, default);
+            var response = await Handler.Handle(Request, default);
 
             response.Success.ShouldBeTrue();
             response.StatusCode.ShouldBe(200);
@@ -42,28 +32,28 @@ namespace RedRainLearningPortal.Mediator.Tests.HandlerTests.UserHandlerTests
         {
             _mockDataHandler.Setup(_ => _.ExecuteAsync(It.IsAny<InsertUser>())).Returns(Task.FromResult(0));
 
-            var response = await _handler.Handle(_request, default);
+            var response = await Handler.Handle(Request, default);
 
             response.Success.ShouldBeFalse();
             response.StatusCode.ShouldBe(409);
             response.Message.ShouldContain("already exists");
-            response.Message.ShouldContain(_request.Email);
-            response.Message.ShouldContain(_request.AccountName);
+            response.Message.ShouldContain(Request.Email);
+            response.Message.ShouldContain(Request.AccountName);
         }
 
         public static readonly object[] InvalidEmailTestCases = 
         {
-            "", "     ", "invalid", "email@", 
-            "MustContain@SomethingDotSomething",
-            "invalid.Email", "@Email.Invalid"
+            "", "     ", "invalid", "email@", "invalid.Email", "@Email.Invalid", "MustContain@SomethingDotSomething",
         };
 
         [Test, TestCaseSource(nameof(InvalidEmailTestCases))]
         public async Task InsertUser_Given_InvalidEmail_ShouldThrow_BadRequest(string invalidEmail)
         {
-            _request.Email = invalidEmail;
+            var request = Request;
+
+            request.Email = invalidEmail;
             
-            await Should.ThrowAsync<BadRequestException>(async () => await _handler.Handle(_request, default));
+            await Should.ThrowAsync<RequestValidationException>(async () => await Handler.Handle(request, default));
         }
     }
 }

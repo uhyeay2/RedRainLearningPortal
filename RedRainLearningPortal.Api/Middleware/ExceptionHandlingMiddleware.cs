@@ -1,4 +1,6 @@
 ﻿using RedRainLearningPortal.Api.Extensions;
+using RedRainLearningPortal.Domain.Models;
+using RedRainLearningPortal.Mediator.Abstractions.Responses;
 using System.Text.Json;
 
 namespace RedRainLearningPortal.Api.Middleware
@@ -23,7 +25,14 @@ namespace RedRainLearningPortal.Api.Middleware
 
             context.Response.StatusCode = e.GetStatusCode();
 
-            await context.Response.WriteAsync(JsonSerializer.Serialize(e.GetExceptionResponse()));
+            if(e is RequestValidationException exception)
+            {
+                await context.Response.WriteAsync(JsonSerializer.Serialize(Response.ValidationFailed(exception.ValidationErrors)));
+            }
+            else
+            {
+                await context.Response.WriteAsync(JsonSerializer.Serialize(Response.Exception(e)));
+            }
         }
     }
 }

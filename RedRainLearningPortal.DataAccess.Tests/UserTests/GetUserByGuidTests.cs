@@ -12,14 +12,15 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         public void GetUserByGuid_Given_UserExistsWithGuid_Should_ReturnUser() =>
             Assert.Multiple(async () =>
             {
-                await InsertUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.Name);
+                await SeedUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.FirstName, _testUser.LastName);
 
                 var user = await _dataHandler.FetchAsync<GetUserByGuid, UserDTO>(new(_testUser.Identifier));
 
                 user.ShouldNotBeNull();
                 user.Identifier.ShouldBe(_testUser.Identifier);
                 user.AccountName.ShouldBe(_testUser.AccountName);
-                user.Name.ShouldBe(_testUser.Name);
+                user.FirstName.ShouldBe(_testUser.FirstName);
+                user.LastName.ShouldBe(_testUser.LastName);
                 user.Email.ShouldBe(_testUser.Email);
             });
     }

@@ -36,9 +36,10 @@ namespace RedRainLearningPortal.DataAccess.Tests
             _testUser = new()
             {
                 Identifier = _randomGuid,
-                Email = randomPrefix + "Test@Email.com",
-                AccountName = randomPrefix + "TestAcc",
-                Name = randomPrefix + "TestName"
+                Email = randomPrefix + "-Test@Email.com",
+                AccountName = randomPrefix + "-AccountName",
+                FirstName = randomPrefix + "-FirstName",
+                LastName = randomPrefix + "-LastName"
             };
         }
 
@@ -52,9 +53,9 @@ namespace RedRainLearningPortal.DataAccess.Tests
 
         #region Seed Data
 
-        protected async Task InsertUser(Guid? guid = null, string? email = null, string? accountName = null, string? name = null) =>
-            await _databaseController.Execute($"INSERT INTO [User] ( Guid, Email, AccountName, Name ) VALUES ( '{guid ?? _testUser.Identifier}',  " +
-                $"'{email ?? _testUser.Email}', '{accountName ?? _testUser.AccountName}', '{name ?? _testUser.Name}' )");
+        protected async Task SeedUser(Guid? guid = null, string? email = null, string? accountName = null, string? firstName = null, string? lastName = null) =>
+            await _databaseController.Execute($"INSERT INTO [User] ( Guid, Email, AccountName, FirstName, LastName ) VALUES ( '{guid ?? _testUser.Identifier}',  " +
+                $"'{email ?? _testUser.Email}', '{accountName ?? _testUser.AccountName}', '{firstName ?? _testUser.FirstName}', '{lastName ?? _testUser.LastName}' )");
 
         #endregion
     }

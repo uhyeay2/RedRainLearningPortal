@@ -11,7 +11,7 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         [Test]
         public async Task IsAccountNameTaken_Given_AccountNameTaken_Should_ReturnTrue()
         {
-            await InsertUser(accountName: _testUser.AccountName);
+            await SeedUser(accountName: _testUser.AccountName);
 
             (await _dataHandler.FetchAsync<IsAccountNameTaken, bool>(new(_testUser.AccountName))).ShouldBeTrue();
         }

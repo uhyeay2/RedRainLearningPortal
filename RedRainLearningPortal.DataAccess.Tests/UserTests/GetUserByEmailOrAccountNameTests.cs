@@ -14,15 +14,15 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         public void GetUserByEmail_Given_UserExistsWithEmail_Should_ReturnUser() =>
             Assert.Multiple(async () =>
             {
-                await InsertUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.Name);
+                await SeedUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.FirstName, _testUser.LastName);
 
-                var user = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(
-                    new() { Email = _testUser.Email });
+                var user = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(new() { Email = _testUser.Email });
 
                 user.ShouldNotBeNull();
                 user.Identifier.ShouldBe(_testUser.Identifier);
                 user.AccountName.ShouldBe(_testUser.AccountName);
-                user.Name.ShouldBe(_testUser.Name);
+                user.FirstName.ShouldBe(_testUser.FirstName);
+                user.LastName.ShouldBe(_testUser.LastName);
                 user.Email.ShouldBe(_testUser.Email);
             });
 
@@ -38,15 +38,15 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         public void GetUserByAccountName_Given_UserExistsWithAccountName_Should_ReturnUser() =>
             Assert.Multiple(async () =>
             {
-                await InsertUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.Name);
+                await SeedUser(_testUser.Identifier, _testUser.Email, _testUser.AccountName, _testUser.FirstName, _testUser.LastName);
 
-                var user = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(
-                    new() { AccountName = _testUser.AccountName });
+                var user = await _dataHandler.FetchAsync<GetUserByEmailOrAccountName, UserDTO>(new() { AccountName = _testUser.AccountName });
 
                 user.ShouldNotBeNull();
                 user.Identifier.ShouldBe(_testUser.Identifier);
                 user.AccountName.ShouldBe(_testUser.AccountName);
-                user.Name.ShouldBe(_testUser.Name);
+                user.FirstName.ShouldBe(_testUser.FirstName);
+                user.LastName.ShouldBe(_testUser.LastName);
                 user.Email.ShouldBe(_testUser.Email);
             });
 

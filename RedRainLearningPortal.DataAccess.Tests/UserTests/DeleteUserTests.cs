@@ -12,7 +12,7 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         [Test]
         public async Task DeleteUser_Given_UserIsDeleted_Should_ReturnOne()
         {
-            await InsertUser(guid: _randomGuid);
+            await SeedUser(guid: _randomGuid);
 
             (await _dataHandler.ExecuteAsync(new DeleteUser(_randomGuid))).ShouldBe(1);
         }
@@ -20,7 +20,7 @@ namespace RedRainLearningPortal.DataAccess.Tests.UserTests
         [Test]
         public async Task DeleteUser_Given_UserIsDeleted_Should_RemoveRecord()
         {
-            await InsertUser(guid: _randomGuid);
+            await SeedUser(guid: _randomGuid);
 
             (await Fetch<UserDTO>($"SELECT * FROM [User] where Guid = '{_randomGuid}'")).ShouldNotBeNull();
 

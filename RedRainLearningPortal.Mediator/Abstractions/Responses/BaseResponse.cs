@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.Mediator.Abstractions.Responses
 {
-    public class BaseResponse : IResponse
+    public class BaseResponse
     {
         public BaseResponse() { }
 
@@ -17,7 +17,7 @@
 
     }
 
-    public class BaseResponse<TContent> : BaseResponse, IResponse<TContent>
+    public class BaseResponse<TContent> : BaseResponse
     {
         public BaseResponse() { }
 

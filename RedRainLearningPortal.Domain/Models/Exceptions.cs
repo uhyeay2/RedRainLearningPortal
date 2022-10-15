@@ -1,7 +1,9 @@
 ﻿namespace RedRainLearningPortal.Domain.Models
 {
-    public class BadRequestException : Exception
+    public class RequestValidationException : Exception
     {
-        public BadRequestException(string? message) : base(message) { }
+        public RequestValidationException(List<string> validationErrors) => ValidationErrors = validationErrors;
+
+        public readonly List<string> ValidationErrors;
     }
 }

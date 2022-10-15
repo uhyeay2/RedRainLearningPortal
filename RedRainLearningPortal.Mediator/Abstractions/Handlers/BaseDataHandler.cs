@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.Mediator.Abstractions.Handlers
 {
-    internal abstract class BaseDataHandler<TRequest> : BaseHandler<TRequest> where TRequest : IRequest<IResponse>
+    internal abstract class BaseDataHandler<TRequest> : BaseHandler<TRequest> where TRequest : IRequest<BaseResponse>
     {
         protected readonly IDataHandler _dataHandler;
 

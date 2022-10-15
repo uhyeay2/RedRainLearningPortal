@@ -1,4 +1,5 @@
 ﻿using RedRainLearningPortal.DataAccess.Models.Requests.UserRequests;
+using RedRainLearningPortal.Domain.Extensions;
 
 namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
 {
@@ -6,30 +7,27 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
     {
         public string AccountName { get; set; } = string.Empty;
 
-        public string? Name { get; set; }
+        public string FirstName { get; set; } = string.Empty;
 
-        public override bool IsValid(out string failedValidationMessage)
+        public string LastName { get; set; } = string.Empty;
+
+        public override bool IsValid(out List<string> validationErrors)
         {
-            var isValid = base.IsValid(out failedValidationMessage);
+            var isValid = base.IsValid(out validationErrors).StringsAreNotNullOrWhiteSpace(out var moreErrors, 
+                (AccountName, nameof(AccountName)), (FirstName, nameof(FirstName)), (LastName, nameof(LastName)));
 
-            if(string.IsNullOrWhiteSpace(AccountName))
-            {
-                failedValidationMessage += " Failed Validation - AccountName field is required!";
-                return false;
-            }
+            validationErrors.AddRange(moreErrors);
 
             return isValid;
         }
     }
 
-    internal class InsertUserHandler : BaseDataHandler<InsertUserRequest>
+    internal class InsertUserHandler : BaseDataHandlerWithMediator<InsertUserRequest>
     {
-        public InsertUserHandler(IDataHandler dataHandler, IMapper mapper) : base(dataHandler, mapper) { }
+        public InsertUserHandler(IDataHandler dataHandler, IMapper mapper, IMediator mediator) : base(dataHandler, mapper, mediator) { }
 
-        internal override async Task<IResponse> HandleRequest(InsertUserRequest request, CancellationToken cancellationToken = default)
-        {
-            return await _dataHandler.ExecuteAsync(_mapper.Map<InsertUser>(request)) == 1 ? Response.Success() 
-                : Response.AlreadyExists("User", $"Email: {request.Email} OR AccountName: {request.AccountName}");
-        }
+        internal override async Task<BaseResponse> HandleRequest(InsertUserRequest request, CancellationToken cancellationToken = default) =>
+            await _dataHandler.ExecuteAsync(_mapper.Map<InsertUser>(request)) == 1 ? 
+            Response.Success() : Response.AlreadyExists("User", $"Email: {request.Email} OR AccountName: {request.AccountName}");
     }
 }

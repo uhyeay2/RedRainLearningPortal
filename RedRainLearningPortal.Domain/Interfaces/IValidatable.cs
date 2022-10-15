@@ -2,6 +2,6 @@
 {
     public interface IValidatable
     {
-        bool IsValid(out string failedValidationMessage);
+        bool IsValid(out List<string> validationErrors);
     }
 }

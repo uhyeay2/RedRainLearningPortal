@@ -1,4 +1,5 @@
 ﻿using RedRainLearningPortal.DataAccess.Models.Requests.UserRequests;
+using RedRainLearningPortal.Domain.Models.Users;
 using RedRainLearningPortal.Mediator.Handlers.UserHandlers;
 
 namespace RedRainLearningPortal.Mediator.Mappings.MappingProfiles
@@ -14,6 +15,7 @@ namespace RedRainLearningPortal.Mediator.Mappings.MappingProfiles
             CreateMap<GetUserByEmailOrAccountName, GetUserByEmailRequest>().ReverseMap();
             CreateMap<GetUserByEmailOrAccountName, GetUserByAccountNameRequest>().ReverseMap();
             CreateMap<GetUserByGuid, GetUserByGuidRequest>().ReverseMap();
+            CreateMap<InsertUserRequest, GetUserByEmailRequest>().ReverseMap();
             
             // IsExists Requests
             CreateMap<IsAccountNameTaken, IsAccountNameTakenRequest>().ReverseMap();
