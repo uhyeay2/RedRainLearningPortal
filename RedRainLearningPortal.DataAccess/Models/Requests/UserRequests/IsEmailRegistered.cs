@@ -4,8 +4,6 @@
     {
         public IsEmailRegistered(string? email) : base(email) { }
 
-        public override string GenerateSql() => _sql;
-        
-        private static readonly string _sql = SqlGenerator.SelectExists("[User]", "Email = @Email");
+        public override string GenerateSql() => SqlGenerator.SelectExists("[User]", "Email = @Email");
     }
 }

@@ -22,9 +22,9 @@ namespace RedRainLearningPortal.Mediator.Handlers.UserHandlers
         }
     }
 
-    internal class InsertUserHandler : BaseDataHandlerWithMediator<InsertUserRequest>
+    internal class InsertUserHandler : BaseDataHandler<InsertUserRequest>
     {
-        public InsertUserHandler(IDataHandler dataHandler, IMapper mapper, IMediator mediator) : base(dataHandler, mapper, mediator) { }
+        public InsertUserHandler(IDataHandler dataHandler, IMapper mapper) : base(dataHandler, mapper) { }
 
         internal override async Task<BaseResponse> HandleRequest(InsertUserRequest request, CancellationToken cancellationToken = default) =>
             await _dataHandler.ExecuteAsync(_mapper.Map<InsertUser>(request)) == 1 ? 

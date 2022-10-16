@@ -6,6 +6,8 @@ namespace RedRainLearningPortal.DataAccess.Models.BaseRequests
     {
         public IdBasedRequest(int id) => Id = id;
 
+        public IdBasedRequest() { }
+
         public int Id { get; set; }
 
         public virtual object? GenerateParameters() => new { Id };

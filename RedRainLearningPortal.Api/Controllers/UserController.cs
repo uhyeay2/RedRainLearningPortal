@@ -1,7 +1,4 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using RedRainLearningPortal.Mediator.Abstractions.Responses;
-using RedRainLearningPortal.Mediator.Handlers.UserHandlers;
+﻿using RedRainLearningPortal.Mediator.Handlers.UserHandlers;
 
 namespace RedRainLearningPortal.Api.Controllers
 {
@@ -45,6 +42,5 @@ namespace RedRainLearningPortal.Api.Controllers
         public async Task<BaseResponse> DeleteAsync(Guid guid) => await _mediator.Send(new DeleteUserRequest() { Guid = guid });
 
         #endregion
-
     }
 }
