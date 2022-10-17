@@ -3,9 +3,9 @@ using RedRainLearningPortal.Mediator.Handlers.UserHandlers;
 
 namespace RedRainLearningPortal.Mediator.Tests.HandlerTests.UserHandlerTests
 {
-    internal class InsertUserHandlerTest : BaseDataHandlerWithMediatorTest
+    internal class InsertUserHandlerTest : BaseDataHandlerTest
     {
-        private InsertUserHandler Handler => new(_mockDataHandler.Object, _mapper, _mockMediator.Object);
+        private InsertUserHandler Handler => new(_mockDataHandler.Object, _mapper);
 
         private static InsertUserRequest Request => new()
         {

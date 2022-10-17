@@ -1,6 +1,4 @@
-﻿using MediatR;
-
-namespace RedRainLearningPortal.Api.Configuration
+﻿namespace RedRainLearningPortal.Api.Configuration
 {
     public static class ServicesDependencyInjection
     {
