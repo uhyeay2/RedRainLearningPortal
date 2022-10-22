@@ -8,8 +8,6 @@
 
         public object? GenerateParameters() => new { AccountName };
 
-        public string GenerateSql() => _sql;
-        
-        private static readonly string _sql = SqlGenerator.SelectExists("[User]", "AccountName = @AccountName");
+        public string GenerateSql() => Fetch.Exists("[User]", "AccountName = @AccountName");
     }
 }

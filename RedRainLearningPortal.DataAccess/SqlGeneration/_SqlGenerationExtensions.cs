@@ -1,9 +1,8 @@
-﻿using RedRainLearningPortal.DataAccess.SqlGeneration.Attributes;
-using System.Reflection;
+﻿using System.Reflection;
 
 namespace RedRainLearningPortal.DataAccess.SqlGeneration
 {
-    internal static class SqlGenerationExtensions
+    internal static class _SqlGenerationExtensions
     {
         /// <summary>
         /// Aggregate a collection of strings with ((a, b) => $"{a},\n {b}") - This helps to increase readability for generated scripts.

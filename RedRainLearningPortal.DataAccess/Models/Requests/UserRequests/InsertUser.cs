@@ -39,7 +39,7 @@
 
         public string GenerateSql() => _sql;
 
-        private static readonly string _sql = SqlGenerator.Insert(typeof(InsertUser));
+        private static readonly string _sql = Insert.ReflectionCommand<InsertUser>();
 
         #endregion
     }

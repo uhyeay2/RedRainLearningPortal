@@ -10,7 +10,7 @@
 
         public string GenerateSql() => _sql;
 
-        private static readonly string _sql = SqlGenerator.Fetch(typeof(UserDTO),
-            whereOverride: "(Email = @Email AND @AccountName IS NULL) OR (AccountName = @AccountName AND @Email IS NULL)");
+        private static readonly string _sql = Fetch.ReflectionQuery<UserDTO>
+            (whereOverride: "(Email = @Email AND @AccountName IS NULL) OR (AccountName = @AccountName AND @Email IS NULL)");
     }
 }

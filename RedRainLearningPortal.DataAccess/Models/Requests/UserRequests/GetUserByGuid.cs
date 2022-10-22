@@ -8,6 +8,6 @@
 
         public override string GenerateSql() => _sql;
 
-        private static readonly string _sql = SqlGenerator.Fetch(typeof(UserDTO));
+        private static readonly string _sql = Fetch.ReflectionQuery<UserDTO>();
     }
 }
