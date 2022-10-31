@@ -1,19 +1,19 @@
 ﻿namespace RedRainLearningPortal.DataAccess.SqlGeneration.Attributes.InsertAttributes
 {
     [AttributeUsage(AttributeTargets.Class, AllowMultiple = true)]
-    public class InsertQuery : SqlScriptAttribute
+    public class InsertCommand : SqlScriptAttribute
     {
-        public InsertQuery(string table) : base(table)
+        public InsertCommand(string table) : base(table)
         {
         }
 
-        public InsertQuery(string table, string from, string where) : base(table, where)
+        public InsertCommand(string table, string from, string where) : base(table, where)
         {
             From = from;
         }
 
 
-        public InsertQuery(string table, string ifNotExists) : base(table)
+        public InsertCommand(string table, string ifNotExists) : base(table)
         {
             IfNotExists = ifNotExists;
         }

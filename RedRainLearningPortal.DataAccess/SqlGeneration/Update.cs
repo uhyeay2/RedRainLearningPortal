@@ -14,7 +14,7 @@
 
         internal static string ReflectionCommand<TRequest>()
         {
-            if (Attribute.GetCustomAttribute(typeof(TRequest), typeof(UpdateQuery)) is not UpdateQuery request)
+            if (Attribute.GetCustomAttribute(typeof(TRequest), typeof(Attributes.UpdateAttributes.UpdateCommand)) is not Attributes.UpdateAttributes.UpdateCommand request)
             {
                 throw new ApplicationException($"{nameof(TRequest)} Must Contain The UpdateQuery Attribute For SQL Generation.");
             }

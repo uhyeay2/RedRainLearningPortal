@@ -65,13 +65,11 @@
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Organizations\Organization.sql" />
-    <Build Include="dbo\Tables\Organizations\OrganizationMember.sql" />
-    <Build Include="dbo\Tables\Organizations\OrganizationRole.sql" />
     <Build Include="dbo\Tables\Users\User.sql" />
     <Build Include="dbo\Tables\Users\UserAction.sql" />
-    <Build Include="dbo\Tables\Organizations\OrganizationMemberRole.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="PublishLocations\RedRainLearningPortal.Database.publish.xml" />
+    <None Include="PublishLocations\RedRainLearningPortalTestEnv.Database.publish.publish.xml" />
   </ItemGroup>
 </Project>

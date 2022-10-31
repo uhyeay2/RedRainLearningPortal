@@ -2,15 +2,34 @@
 {
     internal static class Insert
     {
+        #region Non-Reflection Sql Generation
+
+        /// <summary> $"INSERT INTO {table} ( {columnNames} ) VALUES ( {valueNames} )"; </summary>
         internal static string Command(string table, string columnNames, string valueNames) =>
             $"INSERT INTO {table} ( {columnNames} ) VALUES ( {valueNames} )";
 
+        /// <summary> $"INSERT INTO {table} ( {columnNames} ) SELECT {valueNames} FROM {from} {join} WHERE {where}"; </summary>
         internal static string SelectFromCommand(string table, string columnNames, string valueNames, string from, string where, string join = "") =>
-            $"INSERT INTO {table} ({columnNames}) SELECT {valueNames} FROM {from} {join} {where} ";
+            $"INSERT INTO {table} ( {columnNames} ) SELECT {valueNames} FROM {from} {join} WHERE {where}";
 
+        /// <summary> $"IF NOT EXISTS ( {selectionToNotExist} ) BEGIN \n INSERT INTO {table} ( {columnNames} ) VALUES ( {valueNames} ) END"; </summary>
+        internal static string IfNotExistsCommand(string selectionToNotExist, string table, string columnNames, string valueNames) =>
+            $"IF NOT EXISTS ( {selectionToNotExist} ) BEGIN \n INSERT INTO {table} ( {columnNames} ) VALUES ( {valueNames} ) END";
+
+        /// <summary> $"IF NOT EXISTS ( {selectionToNotExist} ) BEGIN \n INSERT INTO {table} ( {columnNames} ) SELECT {valueNames} FROM {from} {join} WHERE {where} END"; </summary>
+        internal static string IfNotExistsSelectFromCommand(string selectionToNotExist, string table, string columnNames, string valueNames, string from, string where, string join = "") =>
+            $"IF NOT EXISTS ( {selectionToNotExist} ) BEGIN \n INSERT INTO {table} ( {columnNames} ) SELECT {valueNames} FROM {from} {join} WHERE {where} END";
+
+        #endregion
+
+        #region Sql Generation w/ Reflection
+
+        /// <summary>
+        /// Uses reflection to return a string using a request object that uses the InsertCommand attribute
+        /// </summary>
         internal static string ReflectionCommand<TRequest>()
         {
-            if (Attribute.GetCustomAttributes(typeof(TRequest), typeof(InsertQuery)) is not InsertQuery[] requests || !requests.Any())
+            if (Attribute.GetCustomAttributes(typeof(TRequest), typeof(InsertCommand)) is not InsertCommand[] requests || !requests.Any())
             {
                 throw new ApplicationException($"{nameof(TRequest)} Must Contain The InsertQuery Attribute For SQL Generation.");
             }
@@ -63,5 +82,7 @@
             // wrap the return in a BEGIN TRANSACTION if using scoped identity 
             return propertyAttributes.Any(x => x.Attribute.UseScopedIdentity) ? $"BEGIN TRANSACTION \n {inserts} \n COMMIT TRANSACTION" : inserts;
         }
+
+        #endregion
     }
 }

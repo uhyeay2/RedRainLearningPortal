@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.DataAccess.Models.Requests.UserRequests
 {
-    [InsertQuery("[User]", ifNotExists: "SELECT * FROM [User] WITH(NOLOCK) WHERE Email = @Email OR AccountName = @AccountName")]
+    [InsertCommand("[User]", ifNotExists: "SELECT * FROM [User] WITH(NOLOCK) WHERE Email = @Email OR AccountName = @AccountName")]
     public class InsertUser : IRequestObject
     {
         #region Constructors
@@ -37,7 +37,12 @@
 
         public object? GenerateParameters() => new { Email, AccountName, FirstName, LastName };
 
-        public string GenerateSql() => _sql;
+        public string GenerateSql() => Insert.IfNotExistsCommand(
+            selectionToNotExist: Fetch.Query("[User]", where: "Email = @Email OR AccountName = @AccountName"),
+            table: "[User]", 
+            columnNames: "Email, AccountName, FirstName, LastName", 
+            valueNames: "@Email, @AccountName, @FirstName, @LastName"
+            );
 
         private static readonly string _sql = Insert.ReflectionCommand<InsertUser>();
 

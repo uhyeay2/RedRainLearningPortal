@@ -2,9 +2,9 @@
 {
     public class GetUserByGuid : GuidBasedRequest
     {
-        public GetUserByGuid(Guid guid) : base(guid) { }
-
         public GetUserByGuid() { }
+
+        public GetUserByGuid(Guid guid) : base(guid) { }
 
         public override string GenerateSql() => _sql;
 

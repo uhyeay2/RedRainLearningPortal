@@ -15,6 +15,8 @@ namespace RedRainLearningPortal.DataAccess.Tests
 
         protected UserDTO _testUser = null!;
 
+        protected OrganizationDTO _testOrganization = null!;
+
         public BaseTest()
         {
             var mockedConfig = new Mock<IConfig>();
@@ -41,6 +43,13 @@ namespace RedRainLearningPortal.DataAccess.Tests
                 FirstName = randomPrefix + "-FirstName",
                 LastName = randomPrefix + "-LastName"
             };
+
+            _testOrganization = new()
+            {
+                Identifier = Guid.NewGuid(),
+                Name = randomPrefix + "-OrganizationName",
+                Description = randomPrefix + " - Organization Description"
+            };
         }
 
         [TearDown]
@@ -56,6 +65,10 @@ namespace RedRainLearningPortal.DataAccess.Tests
         protected async Task SeedUser(Guid? guid = null, string? email = null, string? accountName = null, string? firstName = null, string? lastName = null) =>
             await _databaseController.Execute($"INSERT INTO [User] ( Guid, Email, AccountName, FirstName, LastName ) VALUES ( '{guid ?? _testUser.Identifier}',  " +
                 $"'{email ?? _testUser.Email}', '{accountName ?? _testUser.AccountName}', '{firstName ?? _testUser.FirstName}', '{lastName ?? _testUser.LastName}' )");
+
+        protected async Task SeedOrganization(Guid? guid = null, string? name = null, string? description = null) =>
+            await _databaseController.Execute($"INSERT INTO Organization (Guid, Name, Description) VALUES ( '{guid ?? _testOrganization.Identifier}' , " +
+                $"'{name ?? _testOrganization.Name}', '{_testOrganization.Description}' )");
 
         #endregion
     }
