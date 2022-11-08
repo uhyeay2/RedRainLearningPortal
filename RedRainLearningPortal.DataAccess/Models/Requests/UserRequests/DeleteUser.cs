@@ -6,6 +6,6 @@
 
         public DeleteUser(Guid guid) : base(guid) { }
 
-        public override string GenerateSql() => Delete.Command("[User]", "Guid = @Guid");
+        public override string GenerateSql() => Delete.Command(Tables.User, "Guid = @Guid");
     }
 }

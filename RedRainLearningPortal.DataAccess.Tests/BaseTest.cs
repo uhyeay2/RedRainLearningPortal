@@ -7,16 +7,6 @@ namespace RedRainLearningPortal.DataAccess.Tests
     [TestFixture]
     public class BaseTest
     {
-        protected readonly IDataHandler _dataHandler;
-
-        private readonly TestDatabaseController _databaseController;
-
-        protected Guid _randomGuid;
-
-        protected UserDTO _testUser = null!;
-
-        protected OrganizationDTO _testOrganization = null!;
-
         public BaseTest()
         {
             var mockedConfig = new Mock<IConfig>();
@@ -28,28 +18,42 @@ namespace RedRainLearningPortal.DataAccess.Tests
             _databaseController = new(_dataHandler);
         }
 
+        // DataHandler used to execute requests
+        protected readonly IDataHandler _dataHandler;
+
+        // Used to Seed/Clear Database
+        private readonly TestDatabaseController _databaseController;
+
+        #region Test Objects
+
+        protected Guid _randomGuid;
+
+        private IEnumerable<char> _randomPrefix => _randomGuid.ToString().Take(4);
+
+        protected UserDTO _testUser => new()
+        {
+            Identifier = _randomGuid,
+            Email = _randomPrefix + "-Test@Email.com",
+            AccountName = _randomPrefix + "-AccountName",
+            FirstName = _randomPrefix + "-FirstName",
+            LastName = _randomPrefix + "-LastName"
+        };
+
+        protected OrganizationDTO _testOrganization => new()
+        {
+            Identifier = Guid.NewGuid(),
+            Name = _randomPrefix + "-OrganizationName",
+            Description = _randomPrefix + " - Organization Description"
+        };
+
+        #endregion
+
+        #region Setup/Teardown
+
         [SetUp]
         public void Setup()
         {
             _randomGuid = Guid.NewGuid();
-
-            var randomPrefix = _randomGuid.ToString().Take(4);
-
-            _testUser = new()
-            {
-                Identifier = _randomGuid,
-                Email = randomPrefix + "-Test@Email.com",
-                AccountName = randomPrefix + "-AccountName",
-                FirstName = randomPrefix + "-FirstName",
-                LastName = randomPrefix + "-LastName"
-            };
-
-            _testOrganization = new()
-            {
-                Identifier = Guid.NewGuid(),
-                Name = randomPrefix + "-OrganizationName",
-                Description = randomPrefix + " - Organization Description"
-            };
         }
 
         [TearDown]
@@ -58,7 +62,10 @@ namespace RedRainLearningPortal.DataAccess.Tests
             await _databaseController.ClearTables();
         }
 
-        public async Task<DTO?> Fetch<DTO>(string sql) => await _databaseController.Fetch<DTO?>(sql);
+        #endregion
+
+        /// <summary> Used to fetch an object from database using InlineSql without using any other request objects </summary>
+        protected async Task<DTO?> Fetch<DTO>(string sql) => await _databaseController.Fetch<DTO?>(sql);
 
         #region Seed Data
 

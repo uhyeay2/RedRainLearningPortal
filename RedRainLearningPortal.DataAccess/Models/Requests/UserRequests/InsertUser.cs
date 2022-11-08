@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.DataAccess.Models.Requests.UserRequests
 {
-    [InsertCommand("[User]", ifNotExists: "SELECT * FROM [User] WITH(NOLOCK) WHERE Email = @Email OR AccountName = @AccountName")]
+    [InsertCommand(Tables.User, ifNotExists: "SELECT * FROM [User] WITH(NOLOCK) WHERE Email = @Email OR AccountName = @AccountName")]
     public class InsertUser : IRequestObject
     {
         #region Constructors
@@ -19,16 +19,16 @@
 
         #region Properties To Insert
 
-        [Insertable("[User]")]
+        [Insertable(Tables.User)]
         public string Email { get; set; } = null!;
 
-        [Insertable("[User]")]
+        [Insertable(Tables.User)]
         public string AccountName { get; set; } = null!;
 
-        [Insertable("[User]")]
+        [Insertable(Tables.User)]
         public string FirstName { get; set; } = null!;
 
-        [Insertable("[User]")]
+        [Insertable(Tables.User)]
         public string LastName { get; set; } = null!;
 
         #endregion
@@ -38,8 +38,8 @@
         public object? GenerateParameters() => new { Email, AccountName, FirstName, LastName };
 
         public string GenerateSql() => Insert.IfNotExistsCommand(
-            selectionToNotExist: Fetch.Query("[User]", where: "Email = @Email OR AccountName = @AccountName"),
-            table: "[User]", 
+            selectionToNotExist: Fetch.Query(Tables.User_NoLock, where: "Email = @Email OR AccountName = @AccountName"),
+            table: Tables.User, 
             columnNames: "Email, AccountName, FirstName, LastName", 
             valueNames: "@Email, @AccountName, @FirstName, @LastName"
             );

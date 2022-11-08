@@ -4,6 +4,6 @@
     {
         public IsEmailRegistered(string? email) : base(email) { }
 
-        public override string GenerateSql() => Fetch.Exists("[User]", "Email = @Email");
+        public override string GenerateSql() => Fetch.Exists(Tables.User_NoLock, "Email = @Email");
     }
 }

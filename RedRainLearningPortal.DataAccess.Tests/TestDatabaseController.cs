@@ -14,7 +14,8 @@ namespace RedRainLearningPortal.DataAccess.Tests
 
         public async Task ClearTables()
         {
-            await Execute("DELETE FROM [User]");
+            await Execute("DELETE FROM [User]" );
+            await Execute("DELETE FROM Organization");
         }
 
         public async Task<TOutput?> Fetch<TOutput>(string sql) => await _dataHandler.FetchAsync<InlineSqlRequest, TOutput>(new(sql));

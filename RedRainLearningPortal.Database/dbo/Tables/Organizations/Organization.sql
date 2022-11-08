@@ -6,7 +6,7 @@
 	
 	[Name] NVARCHAR(MAX) NOT NULL,
 
-	[Description] NVARCHAR(MAX) NOT NULL,
+	[Description] NVARCHAR(MAX) NULL,
 
 	[CreatedAtDateTimeUTC] DATETIME NOT NULL DEFAULT GETUTCDATE(),
 

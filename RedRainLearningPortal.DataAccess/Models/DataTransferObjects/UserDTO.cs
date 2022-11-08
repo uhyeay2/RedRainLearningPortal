@@ -1,6 +1,6 @@
 ﻿namespace RedRainLearningPortal.DataAccess.Models.DataTransferObjects
 {
-    [FetchQuery("[User] WITH(NOLOCK)", where: "Guid = @Guid")] 
+    [FetchQuery(Tables.User_NoLock, where: "Guid = @Guid")] 
     public class UserDTO
     {
         [Fetchable]

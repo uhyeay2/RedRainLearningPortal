@@ -8,6 +8,6 @@
 
         public object? GenerateParameters() => new { AccountName };
 
-        public string GenerateSql() => Fetch.Exists("[User]", "AccountName = @AccountName");
+        public string GenerateSql() => Fetch.Exists(Tables.User_NoLock, "AccountName = @AccountName");
     }
 }
